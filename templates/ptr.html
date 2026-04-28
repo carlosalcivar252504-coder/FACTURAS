@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ficha Técnica PTR · Mall del Sol</title>
+<link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon_azul.png') }}">
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+:root{--blue:#1d4ed8;--green:#059669;--amber:#d97706;--red:#dc2626}
+body{background:linear-gradient(135deg,#0c1f45 0%,#1a3870 100%);min-height:100vh;font-family:'Segoe UI',system-ui,sans-serif}
+.card{background:#fff;border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,.35)}
+.drop-zone{border:2.5px dashed #93c5fd;border-radius:12px;transition:all .25s;background:linear-gradient(135deg,#f0f7ff,#e0edff);cursor:pointer}
+.drop-zone:hover,.drop-zone.over{border-color:#1d4ed8;background:linear-gradient(135deg,#dbeafe,#bfdbfe);transform:scale(1.01)}
+.inp{border:1.5px solid #d1d5db;border-radius:8px;padding:7px 10px;font-size:13px;width:100%;transition:.2s;background:#fff;box-sizing:border-box}
+.inp:focus{border-color:#1d4ed8;outline:none;box-shadow:0 0 0 3px rgba(29,78,216,.15)}
+.inp.warn{border-color:#f59e0b !important;background:#fffbeb !important}
+.inp.empty{border-color:#e5e7eb;background:#f9fafb}
+.inp.ok{border-color:#10b981;background:#f0fdf4}
+.inp-auto{border:1.5px solid #c7d2fe;border-radius:8px;padding:7px 10px;font-size:13px;width:100%;background:#eef2ff;color:#3730a3;font-weight:600;box-sizing:border-box;cursor:default}
+.lbl{font-size:10.5px;font-weight:700;letter-spacing:.7px;color:#374151;margin-bottom:3px;display:block;text-transform:uppercase}
+.lbl .req{color:#dc2626}
+.lbl .auto{color:#6366f1;font-size:9px;font-weight:600;letter-spacing:.5px;background:#eef2ff;padding:1px 5px;border-radius:4px;margin-left:4px}
+.btn{border-radius:9px;padding:9px 18px;font-weight:700;font-size:13px;border:none;cursor:pointer;transition:.2s;display:inline-flex;align-items:center;gap:6px}
+.btn:hover{transform:translateY(-1px);filter:brightness(1.08)}
+.btn:active{transform:translateY(0)}
+.btn:disabled{opacity:.5;cursor:not-allowed;transform:none;filter:none}
+.btn-primary{background:linear-gradient(135deg,#1d4ed8,#2563eb);color:#fff}
+.btn-success{background:linear-gradient(135deg,#047857,#059669);color:#fff}
+.btn-amber{background:linear-gradient(135deg,#b45309,#d97706);color:#fff}
+.btn-red{background:linear-gradient(135deg,#b91c1c,#dc2626);color:#fff}
+.btn-gray{background:#f3f4f6;color:#374151;border:1px solid #d1d5db}
+.btn-indigo{background:linear-gradient(135deg,#4338ca,#6366f1);color:#fff}
+.btn-sm{padding:6px 12px;font-size:12px}
+.spin{animation:spin 1s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.fade-in{animation:fadeIn .35s ease-out}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.tab-btn{padding:8px 20px;border-radius:8px;cursor:pointer;font-weight:600;font-size:13px;transition:.2s;border:none}
+.tab-btn.on{background:#1d4ed8;color:#fff;box-shadow:0 4px 12px rgba(29,78,216,.35)}
+.tab-btn.off{background:rgba(255,255,255,.15);color:#bfdbfe;border:1px solid rgba(255,255,255,.2)}
+.tab-btn.off:hover{background:rgba(255,255,255,.25)}
+.toast-wrap{position:fixed;top:16px;right:16px;z-index:9999;display:flex;flex-direction:column;gap:8px;pointer-events:none}
+.toast-item{padding:12px 18px;border-radius:10px;color:#fff;font-size:13px;font-weight:600;display:flex;align-items:center;gap:8px;box-shadow:0 8px 24px rgba(0,0,0,.25);animation:fadeIn .3s ease-out;pointer-events:auto}
+.t-ok{background:#059669}.t-err{background:#dc2626}.t-warn{background:#d97706}.t-info{background:#2563eb}
+.stage{display:flex;align-items:flex-start;gap:10px;padding:12px 16px;border-radius:10px;font-size:13px}
+.stage-proc{background:#eff6ff;border:1px solid #bfdbfe;color:#1e40af}
+.stage-ok{background:#ecfdf5;border:1px solid #a7f3d0;color:#065f46}
+.stage-err{background:#fef2f2;border:1px solid #fecaca;color:#991b1b}
+.stage-warn{background:#fffbeb;border:1px solid #fde68a;color:#92400e}
+table{width:100%;border-collapse:collapse}
+table th{background:#1e3a6f;color:#fff;font-size:10.5px;padding:9px 6px;text-align:left;white-space:nowrap;position:sticky;top:0;z-index:1}
+table td{font-size:11.5px;padding:6px;border-bottom:1px solid #f0f4f8;vertical-align:top}
+tr:hover td{background:#f0f7ff}
+.progress-bar{height:4px;background:#e5e7eb;border-radius:2px;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,#2563eb,#06b6d4);border-radius:2px;transition:width .3s}
+/* BARRA API KEY */
+.apikey-input{background:rgba(255,255,255,.08);border:1.5px solid rgba(99,102,241,.4);border-radius:9px;padding:7px 12px;color:#e0e7ff;font-size:13px;font-family:'Courier New',monospace;width:320px;outline:none;transition:.2s}
+.apikey-input::placeholder{color:rgba(165,180,252,.5)}
+.apikey-input:focus{border-color:#6366f1;background:rgba(255,255,255,.12)}
+.key-status-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.key-status-dot.ok{background:#10b981;box-shadow:0 0 6px #10b981}
+.key-status-dot.warn{background:#f59e0b;box-shadow:0 0 6px #f59e0b}
+.personal-tag{background:#e0f2fe;color:#0369a1;border-radius:6px;padding:2px 8px;font-size:11px;font-family:monospace;display:inline-block;margin:1px}
+/* Modal */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:50;display:flex;align-items:center;justify-content:center;padding:1rem}
+</style>
+</head>
+<body class="p-3 md:p-5">
+
+<!-- HEADER -->
+<div class="flex items-center mb-4 fade-in">
+  <img src="{{ url_for('static', filename='logo_blanco.png') }}" alt="Logo" class="h-10 w-auto">
+  <div class="ml-4 border-l-2 border-blue-500/30 pl-4">
+    <p class="text-blue-200 text-[9px] font-bold uppercase tracking-widest">Departamento de Operaciones</p>
+    <h1 class="text-white font-black text-xl tracking-tighter leading-none">MOBILSOL</h1>
+    <p class="text-blue-300 text-[10px] font-bold uppercase tracking-widest mt-1">Automatización Contable</p>
+  </div>
+  <!-- Nav -->
+  <div class="ml-auto flex gap-2">
+    <a href="/" class="tab-btn off text-sm">📄 Facturas</a>
+    <span class="tab-btn on text-sm">📋 Ficha PTR</span>
+  </div>
+</div>
+
+<!-- BARRA DE API KEY DE USUARIO -->
+<div class="max-w-7xl mx-auto mb-4">
+  <div style="background:rgba(15,32,68,.75);border:1px solid rgba(99,102,241,.35);border-radius:14px;padding:14px 18px;backdrop-filter:blur(6px)">
+    <div class="flex flex-wrap items-center gap-3">
+      <!-- Icono + título -->
+      <div class="flex items-center gap-2 flex-shrink-0">
+        <div class="bg-indigo-500 rounded-lg p-1.5">
+          <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"/>
+          </svg>
+        </div>
+        <div>
+          <p class="text-indigo-200 text-xs font-bold uppercase tracking-wider">Google Gemini · API Key</p>
+          <p class="text-indigo-400 text-[10px]">Modelo: <span class="text-green-400 font-bold">gemini-2.5-flash</span></p>
+        </div>
+      </div>
+
+      <!-- Input de API key -->
+      <div class="flex items-center gap-2 flex-1 min-w-0">
+        <input
+          id="apikeyInput"
+          type="password"
+          class="apikey-input"
+          placeholder="AIzaSy… — Ingresa tu API key de Gemini"
+          autocomplete="off"
+          onkeydown="if(event.key==='Enter') saveApiKey()"
+        >
+        <button onclick="saveApiKey()" class="btn btn-indigo btn-sm flex-shrink-0">✓ Guardar</button>
+        <button onclick="toggleKeyVisibility()" class="btn btn-gray btn-sm flex-shrink-0" title="Mostrar/ocultar">👁</button>
+        <button onclick="clearApiKey()" class="btn btn-gray btn-sm flex-shrink-0" title="Borrar key">✕</button>
+      </div>
+
+      <!-- Estado -->
+      <div class="flex items-center gap-2 flex-shrink-0">
+        <span id="keyStatusDot" class="key-status-dot warn"></span>
+        <span id="keyStatusText" class="text-xs text-indigo-300">Sin API key — ingresa la tuya</span>
+      </div>
+
+      <!-- Link -->
+      <a href="https://aistudio.google.com/app/apikey" target="_blank"
+         class="btn btn-sm flex-shrink-0"
+         style="background:rgba(255,255,255,.08);color:#a5b4fc;border:1px solid rgba(165,180,252,.3);font-size:11px">
+        🔗 Obtener key gratis
+      </a>
+    </div>
+
+    <!-- Aviso sin key -->
+    <div id="noKeyWarning" class="mt-3 p-2.5 rounded-lg text-xs font-semibold flex items-center gap-2"
+         style="background:rgba(245,158,11,.12);border:1px solid rgba(245,158,11,.35);color:#fcd34d">
+      <span>⚠</span>
+      <span>Necesitas ingresar tu API key de Google Gemini para procesar documentos.
+        <a href="https://aistudio.google.com/app/apikey" target="_blank" class="underline ml-1">Obtén una gratis aquí</a>
+        (requiere cuenta Google).
+      </span>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE HEADER -->
+<header class="text-center mb-4">
+  <div class="flex items-center justify-center gap-3 mb-1">
+    <div class="bg-white rounded-xl p-2.5 shadow-lg">
+      <svg class="w-7 h-7 text-green-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/>
+      </svg>
+    </div>
+    <div class="text-left">
+      <h1 class="text-2xl md:text-3xl font-black text-white tracking-tight">Ficha Técnica · PTR</h1>
+      <p class="text-green-300 text-xs">Extracción automática de Permisos de Trabajo · Gemini AI</p>
+    </div>
+  </div>
+</header>
+
+<!-- TABS -->
+<div class="flex gap-2 justify-center mb-4">
+  <button class="tab-btn on" id="tab-upload" onclick="switchTab('upload')">
+    📤 Subir PTR
+  </button>
+  <button class="tab-btn off" id="tab-records" onclick="switchTab('records')">
+    📊 Registros
+    <span id="badge-count" class="ml-1 bg-white text-blue-700 rounded-full px-2 text-xs font-black">0</span>
+  </button>
+</div>
+
+<!-- ══════════ TAB: SUBIR PTR ══════════ -->
+<div id="pane-upload" class="fade-in">
+<div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-4">
+
+  <!-- LEFT: Drop + estado -->
+  <div class="card p-5 flex flex-col gap-4">
+    <h2 class="font-bold text-gray-800 flex items-center gap-2 text-base">
+      <span class="bg-green-100 text-green-700 rounded-lg p-1.5 text-lg">📤</span>
+      Subir PDF de PTR
+    </h2>
+    <p class="text-xs text-gray-500 -mt-2">Puedes subir varios PTR — se procesarán uno por uno automáticamente</p>
+
+    <div class="drop-zone p-6 text-center" id="dropZone"
+         onclick="document.getElementById('fileIn').click()">
+      <input type="file" id="fileIn" accept=".pdf" class="hidden" onchange="onFileSelected(event)" multiple>
+      <div id="dropContent">
+        <div class="text-5xl mb-2">📋</div>
+        <p class="text-blue-700 font-bold">Arrastra los PDFs de PTR aquí</p>
+        <p class="text-blue-400 text-sm mt-1">o haz clic para seleccionar</p>
+        <p class="text-gray-400 text-xs mt-2">Permisos de Trabajo en Altura, Caliente, Eléctrico, etc.</p>
+        <p class="text-gray-300 text-xs mt-1">Múltiples archivos se procesan automáticamente 1 por 1</p>
+      </div>
+    </div>
+
+    <!-- Estado -->
+    <div id="stageBox"></div>
+
+    <!-- Progreso múltiples archivos -->
+    <div id="multiProgress" class="hidden">
+      <div class="flex justify-between text-xs text-gray-500 mb-1">
+        <span id="multiLabel">Procesando…</span>
+        <span id="multiCounter">0/0</span>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill" style="width:0%"></div>
+      </div>
+      <div id="processLog" class="mt-2 text-xs text-gray-500 max-h-24 overflow-y-auto space-y-0.5"></div>
+    </div>
+
+    <!-- Queue de archivos -->
+    <div id="queueBox" class="hidden">
+      <p class="text-xs font-bold text-gray-400 mb-1 uppercase tracking-wide">Cola de archivos</p>
+      <div id="queueList" class="space-y-1"></div>
+    </div>
+
+    <button onclick="clearAll()" id="btnClear" class="btn btn-gray hidden w-full">
+      ✕ Limpiar
+    </button>
+  </div>
+
+  <!-- RIGHT: Formulario datos extraídos -->
+  <div class="card p-5">
+    <div class="flex items-center justify-between mb-3">
+      <h2 class="font-bold text-gray-800 flex items-center gap-2 text-base">
+        <span class="bg-green-100 text-green-700 rounded-lg p-1.5 text-lg">✏️</span>
+        Datos Extraídos del PTR
+      </h2>
+      <span id="statusBadge" class="hidden text-xs font-bold px-3 py-1 rounded-full"></span>
+    </div>
+
+    <div id="warnNote" class="hidden mb-3 p-2.5 bg-amber-50 border border-amber-200 rounded-lg text-xs text-amber-800 font-semibold flex items-start gap-2">
+      <span class="text-base">⚠️</span>
+      <span>Algunos campos no fueron encontrados — revisa el PTR manualmente.</span>
+    </div>
+
+    <form id="ptrForm" class="space-y-2.5" onsubmit="return false">
+
+      <!-- Nombre Comercial + Categoría -->
+      <div class="grid grid-cols-2 gap-2.5">
+        <div>
+          <label class="lbl">Nombre Comercial <span class="req">*</span></label>
+          <input id="p_nombre" class="inp" placeholder="Empresa contratista" autocomplete="off">
+        </div>
+        <div>
+          <label class="lbl">Categoría-Área <span class="auto">AUTO</span></label>
+          <input id="p_categoria" class="inp-auto" readonly placeholder="INFRAESTRUCTURA / TÉCNICO">
+        </div>
+      </div>
+
+      <!-- Semana + Fechas -->
+      <div class="grid grid-cols-3 gap-2.5">
+        <div>
+          <label class="lbl">Semana <span class="auto">AUTO</span></label>
+          <input id="p_semana" class="inp-auto" readonly placeholder="N° semana">
+        </div>
+        <div>
+          <label class="lbl">Fecha Inicio <span class="req">*</span></label>
+          <input id="p_fecha_inicio" class="inp" placeholder="DD/MM/AAAA" autocomplete="off" onchange="recalcSemana()">
+        </div>
+        <div>
+          <label class="lbl">Fecha Final <span class="req">*</span></label>
+          <input id="p_fecha_fin" class="inp" placeholder="DD/MM/AAAA" autocomplete="off" onchange="recalcSemana()">
+        </div>
+      </div>
+
+      <!-- Descripción -->
+      <div>
+        <label class="lbl">Descripción del Trabajo <span class="req">*</span></label>
+        <textarea id="p_descripcion" class="inp" rows="3" placeholder="Descripción completa del trabajo a ejecutar…"></textarea>
+      </div>
+
+      <!-- Tipo Permiso + Área -->
+      <div class="grid grid-cols-2 gap-2.5">
+        <div>
+          <label class="lbl">Tipo de Permiso <span class="auto">AUTO</span> <span class="text-gray-400 font-normal normal-case text-xs">(referencia interna)</span></label>
+          <input id="p_tipo" class="inp" placeholder="Altura, Caliente, Eléctrico…" autocomplete="off">
+        </div>
+        <div>
+          <label class="lbl">Área de Trabajo</label>
+          <input id="p_area" class="inp" placeholder="Fachada, Techo, Local…" autocomplete="off">
+        </div>
+      </div>
+
+      <!-- Accesos SIA + Orden + Responsable -->
+      <div class="grid grid-cols-3 gap-2.5">
+        <div>
+          <label class="lbl">Accesos SIA <span class="auto">AUTO</span></label>
+          <input id="p_sia" class="inp-auto" readonly placeholder="— automático —">
+        </div>
+        <div>
+          <label class="lbl">Orden de Trabajo</label>
+          <input id="p_orden" class="inp" placeholder="N° orden" autocomplete="off">
+        </div>
+        <div>
+          <label class="lbl">Responsable <span class="auto">AUTO</span></label>
+          <input id="p_responsable" class="inp-auto" readonly placeholder="Calculado">
+        </div>
+      </div>
+
+      <!-- Fecha Registro -->
+      <div>
+        <label class="lbl">Fecha de Registro <span class="auto">AUTO</span></label>
+        <input id="p_fecha_reg" class="inp-auto" readonly placeholder="Fecha de hoy">
+      </div>
+
+      <!-- Personal Autorizado -->
+      <div>
+        <label class="lbl">Personal Autorizado <span class="req">*</span>
+          <span class="font-normal normal-case text-xs text-gray-400 ml-1">Nombre COMPLETO: cédula</span>
+        </label>
+        <textarea id="p_personal_raw" class="inp font-mono text-xs" rows="5"
+          placeholder="ZAVALA REYES JAVIER MANUEL: 0917449951&#10;PINCAY REYES DANIEL EDUARDO: 0927626630&#10;..."></textarea>
+        <p class="text-xs text-gray-400 mt-0.5">Un trabajador por línea. Formato: APELLIDO NOMBRE: cédula</p>
+      </div>
+
+    </form>
+
+    <div class="flex gap-2 mt-4">
+      <button onclick="saveRecord()" id="btnSave" class="btn btn-success flex-1" disabled>
+        ✓ Guardar Registro
+      </button>
+      <button onclick="clearForm()" class="btn btn-amber">↺ Limpiar</button>
+    </div>
+  </div>
+
+</div>
+</div><!-- /pane-upload -->
+
+
+<!-- ══════════ TAB: REGISTROS ══════════ -->
+<div id="pane-records" class="hidden fade-in">
+<div class="max-w-full mx-auto card p-5">
+  <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
+    <h2 class="font-bold text-gray-800 flex items-center gap-2">
+      <span class="bg-green-100 text-green-700 rounded-lg p-1.5 text-lg">📊</span>
+      Registros PTR Guardados
+      <span id="totalBadge" class="bg-green-600 text-white rounded-full px-3 py-0.5 text-sm font-black">0</span>
+    </h2>
+    <div class="flex gap-2 flex-wrap">
+      <button onclick="exportExcel()" class="btn btn-success">📥 Exportar Excel</button>
+      <button onclick="clearAllRecords()" class="btn btn-red">🗑 Limpiar Todo</button>
+    </div>
+  </div>
+
+  <div class="overflow-x-auto rounded-xl border border-gray-200 max-h-[70vh] overflow-y-auto">
+    <table>
+      <thead>
+        <tr>
+          <th class="w-8">#</th>
+          <th>NOMBRE COMERCIAL</th>
+          <th>CATEGORÍA</th>
+          <th>SEMANA</th>
+          <th>FECHA INICIO</th>
+          <th>FECHA FIN</th>
+          <th style="min-width:220px">DESCRIPCIÓN</th>
+          <th>TIPO PERMISO</th>
+          <th style="min-width:200px">PERSONAL</th>
+          <th>FECHA REG.</th>
+          <th>RESPONSABLE</th>
+          <th class="w-12">⚙</th>
+        </tr>
+      </thead>
+      <tbody id="recBody">
+        <tr><td colspan="12" class="text-center py-16 text-gray-400">
+          <div class="text-5xl mb-3 opacity-20">📋</div>
+          <p class="font-medium">No hay registros · Sube un PTR para comenzar</p>
+        </td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+</div><!-- /pane-records -->
+
+<!-- Toasts -->
+<div id="toasts" class="toast-wrap"></div>
+
+<!-- Modal edición -->
+<div id="editModal" class="hidden modal-overlay" onclick="if(event.target===this)closeEditModal()">
+  <div class="bg-white rounded-2xl p-6 w-full max-w-2xl shadow-2xl max-h-[90vh] overflow-y-auto">
+    <h3 class="font-bold text-gray-800 mb-4">✏️ Editar Registro PTR</h3>
+    <div id="modalBody" class="space-y-3"></div>
+    <div class="flex gap-2 mt-5">
+      <button onclick="saveEditModal()" class="btn btn-success flex-1">✓ Guardar cambios</button>
+      <button onclick="closeEditModal()" class="btn btn-gray">Cancelar</button>
+    </div>
+  </div>
+</div>
+
+
+<script>
+// ═══════════════════════════════════════════════════
+// ESTADO GLOBAL
+// ═══════════════════════════════════════════════════
+const LSKEY = 'ptr_v1';
+let registros  = JSON.parse(localStorage.getItem(LSKEY) || '[]');
+let editingIdx = null;
+let processingQueue = [];
+let isProcessing = false;
+
+// ═══════════════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════════════
+async function init() {
+  updateBadges();
+  setupDrop();
+  // Fecha de registro = hoy
+  document.getElementById('p_fecha_reg').value = new Date().toLocaleDateString('es-EC', {
+    day:'2-digit', month:'2-digit', year:'numeric'
+  });
+
+  // Restaurar key desde localStorage si existe
+  const savedKey = localStorage.getItem('gemini_api_key');
+  if (savedKey) {
+    document.getElementById('apikeyInput').value = savedKey;
+    await saveApiKey(true); // silencioso
+  } else {
+    await checkKeyStatus();
+  }
+}
+
+// ═══════════════════════════════════════════════════
+// MANEJO DE API KEY DE USUARIO
+// ═══════════════════════════════════════════════════
+async function saveApiKey(silent = false) {
+  const key = document.getElementById('apikeyInput').value.trim();
+  if (!key) {
+    if (!silent) toast('Ingresa una API key válida', 'warn');
+    return;
+  }
+  try {
+    const r = await fetch('/api/set-key', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({api_key: key})
+    });
+    const d = await r.json();
+    if (d.success) {
+      localStorage.setItem('gemini_api_key', key);
+      updateKeyUI(true, d.preview);
+      if (!silent) toast(`API key guardada ✓ · Modelo: ${d.model}`, 'ok');
+    } else {
+      updateKeyUI(false);
+      if (!silent) toast('Error: ' + (d.error || 'Key inválida'), 'err');
+    }
+  } catch(e) {
+    if (!silent) toast('Error guardando key: ' + e.message, 'err');
+  }
+}
+
+function clearApiKey() {
+  localStorage.removeItem('gemini_api_key');
+  document.getElementById('apikeyInput').value = '';
+  updateKeyUI(false);
+  toast('API key eliminada', 'warn');
+}
+
+function toggleKeyVisibility() {
+  const inp = document.getElementById('apikeyInput');
+  inp.type = inp.type === 'password' ? 'text' : 'password';
+}
+
+async function checkKeyStatus() {
+  try {
+    const r = await fetch('/api/get-key-status');
+    const d = await r.json();
+    updateKeyUI(d.has_key, d.preview);
+  } catch(e) {}
+}
+
+function updateKeyUI(hasKey, preview) {
+  const dot  = document.getElementById('keyStatusDot');
+  const txt  = document.getElementById('keyStatusText');
+  const warn = document.getElementById('noKeyWarning');
+
+  if (hasKey) {
+    dot.className  = 'key-status-dot ok';
+    txt.textContent = `✓ Key activa: ${preview || '...'} · gemini-2.5-flash listo`;
+    txt.className   = 'text-xs text-green-400 font-semibold';
+    warn.style.display = 'none';
+  } else {
+    dot.className  = 'key-status-dot warn';
+    txt.textContent = 'Sin API key — ingresa la tuya para comenzar';
+    txt.className   = 'text-xs text-amber-300';
+    warn.style.display = '';
+  }
+}
+
+// ═══════════════════════════════════════════════════
+// TABS
+// ═══════════════════════════════════════════════════
+function switchTab(t) {
+  ['upload','records'].forEach(x => {
+    document.getElementById(`pane-${x}`).classList.toggle('hidden', x !== t);
+    document.getElementById(`tab-${x}`).className = `tab-btn ${x===t?'on':'off'}`;
+  });
+  if (t === 'records') renderRecords();
+}
+
+// ═══════════════════════════════════════════════════
+// DRAG & DROP
+// ═══════════════════════════════════════════════════
+function setupDrop() {
+  const dz = document.getElementById('dropZone');
+  dz.addEventListener('dragover', e => { e.preventDefault(); dz.classList.add('over'); });
+  dz.addEventListener('dragleave', () => dz.classList.remove('over'));
+  dz.addEventListener('drop', e => {
+    e.preventDefault(); dz.classList.remove('over');
+    const files = [...e.dataTransfer.files].filter(f => f.name.toLowerCase().endsWith('.pdf'));
+    if (!files.length) { toast('Solo se aceptan archivos PDF', 'err'); return; }
+    handleFiles(files);
+  });
+}
+
+function onFileSelected(e) {
+  const files = [...e.target.files].filter(f => f.name.toLowerCase().endsWith('.pdf'));
+  if (files.length) handleFiles(files);
+}
+
+// ═══════════════════════════════════════════════════
+// COLA DE PROCESAMIENTO SECUENCIAL
+// ═══════════════════════════════════════════════════
+async function handleFiles(files) {
+  processingQueue = [...files];
+  renderQueue();
+
+  document.getElementById('btnClear').classList.remove('hidden');
+  document.getElementById('btnSave').disabled = true;
+  document.getElementById('queueBox').classList.remove('hidden');
+
+  if (files.length === 1) {
+    // Un solo archivo: mostrar en formulario para revisión
+    await processSingle(files[0]);
+  } else {
+    // Múltiples: procesar en cola secuencial, guardar automáticamente
+    await processQueue();
+  }
+}
+
+function renderQueue() {
+  const list = document.getElementById('queueList');
+  list.innerHTML = processingQueue.map((f, i) => `
+    <div class="flex items-center gap-2 text-xs py-1 border-b border-gray-100" id="q_${i}">
+      <span class="text-gray-300 w-3">⏳</span>
+      <span class="text-gray-600 truncate flex-1">${f.name}</span>
+      <span class="text-gray-400">${(f.size/1024).toFixed(0)}KB</span>
+    </div>
+  `).join('');
+}
+
+function updateQueueItem(i, status) {
+  const el = document.getElementById(`q_${i}`);
+  if (!el) return;
+  const icons = {ok:'✅', err:'❌', proc:'🔄', wait:'⏳'};
+  const cols  = {ok:'text-green-600', err:'text-red-500', proc:'text-blue-500', wait:'text-gray-300'};
+  const span  = el.querySelector('span:first-child');
+  if (span) { span.textContent = icons[status] || '⏳'; span.className = cols[status] || 'text-gray-300'; }
+}
+
+async function processQueue() {
+  document.getElementById('multiProgress').classList.remove('hidden');
+  const logEl = document.getElementById('processLog');
+  let saved = 0;
+
+  for (let i = 0; i < processingQueue.length; i++) {
+    const f = processingQueue[i];
+    updateQueueItem(i, 'proc');
+    document.getElementById('multiLabel').textContent   = `Procesando: ${f.name}`;
+    document.getElementById('multiCounter').textContent = `${i+1}/${processingQueue.length}`;
+    document.getElementById('progressFill').style.width = `${((i)/processingQueue.length)*100}%`;
+    setStage('proc', `⏳ ${i+1}/${processingQueue.length}: ${f.name}`, 'Enviando a Gemini AI…');
+
+    try {
+      const data = await callExtractPtr(f);
+      const rec  = buildRecord(data);
+      rec._filename = f.name;
+      registros.push(rec);
+      saveLocal();
+      updateBadges();
+      saved++;
+      updateQueueItem(i, 'ok');
+      logEl.innerHTML += `<div class="text-green-600">✅ ${f.name} → ${rec.nombre_comercial || '?'}</div>`;
+      setStage('ok', `✓ ${f.name}`, `${rec.nombre_comercial || 'Extraído'} · ${rec.personal?.length || 0} trabajadores`);
+    } catch(err) {
+      updateQueueItem(i, 'err');
+      logEl.innerHTML += `<div class="text-red-500">❌ ${f.name}: ${err.message.slice(0,60)}</div>`;
+      setStage('err', `✗ ${f.name}`, err.message);
+      toast(`Error en ${f.name}: ${err.message.slice(0,60)}`, 'err');
+    }
+
+    logEl.scrollTop = logEl.scrollHeight;
+    // Pequeña pausa entre archivos para no saturar la API
+    if (i < processingQueue.length - 1) await sleep(800);
+  }
+
+  document.getElementById('progressFill').style.width = '100%';
+  document.getElementById('multiLabel').textContent   = `Completado: ${saved}/${processingQueue.length} guardados`;
+  document.getElementById('multiCounter').textContent = `${processingQueue.length}/${processingQueue.length}`;
+  toast(`${saved} PTR(s) procesados y guardados ✓`, 'ok');
+  setTimeout(() => switchTab('records'), 1500);
+}
+
+async function processSingle(file) {
+  document.getElementById('dropContent').innerHTML = `
+    <div class="text-4xl mb-1">📋</div>
+    <p class="text-green-700 font-bold text-sm">${file.name}</p>
+    <p class="text-gray-400 text-xs">${(file.size/1024).toFixed(0)} KB</p>`;
+
+  setStage('proc', '🤖 Analizando PTR con Gemini…', 'Extrayendo personal, descripción, tipo de permiso…');
+  updateQueueItem(0, 'proc');
+
+  try {
+    const t0   = Date.now();
+    const data = await callExtractPtr(file);
+    const secs = ((Date.now()-t0)/1000).toFixed(1);
+
+    fillForm(data);
+    updateQueueItem(0, 'ok');
+    setStage('ok', `✓ PTR analizado en ${secs}s`, `${data.personal?.length || 0} trabajadores · ${data.tipo_permiso || 'Tipo detectado'}`);
+    document.getElementById('btnSave').disabled = false;
+    toast(`PTR extraído en ${secs}s ✓`, 'ok');
+  } catch(err) {
+    updateQueueItem(0, 'err');
+    setStage('err', '✗ Error al analizar PTR', err.message);
+    toast(err.message, 'err');
+  }
+}
+
+async function callExtractPtr(file) {
+  const fd = new FormData();
+  fd.append('file', file);
+  const res = await fetch('/api/extract-ptr', { method: 'POST', body: fd });
+  const json = await res.json();
+  if (!res.ok || !json.success) throw new Error(json.error || 'Error en el servidor');
+  return json.data;
+}
+
+function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+function setStage(type, title, detail) {
+  const cls  = {proc:'stage-proc', ok:'stage-ok', err:'stage-err', warn:'stage-warn'};
+  const icon = type === 'proc'
+    ? '<svg class="spin w-5 h-5 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"/></svg>'
+    : `<span class="text-lg flex-shrink-0 mt-0.5">${type==='ok'?'✅':type==='err'?'❌':'⚠️'}</span>`;
+  document.getElementById('stageBox').innerHTML = `
+    <div class="stage ${cls[type]} mb-2">
+      ${icon}
+      <div><p class="font-bold text-sm">${title}</p>
+      <p class="text-xs opacity-75 mt-0.5">${detail}</p></div>
+    </div>`;
+}
+
+// ═══════════════════════════════════════════════════
+// FORMULARIO
+// ═══════════════════════════════════════════════════
+function fillForm(data) {
+  let hasWarn = false;
+
+  const set = (id, val, required=false) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.value = val || '';
+    el.classList.remove('warn','empty','ok');
+    if (!val && required) { el.classList.add('warn'); hasWarn = true; }
+    else if (!val) el.classList.add('empty');
+    else el.classList.add('ok');
+  };
+
+  set('p_nombre',       data.nombre_comercial,       true);
+  set('p_fecha_inicio', data.fecha_inicio,            true);
+  set('p_fecha_fin',    data.fecha_fin,               true);
+  set('p_descripcion',  data.descripcion,             true);
+  set('p_tipo',         data.tipo_permiso,            false);
+  set('p_area',         data.area_trabajo,            false);
+  set('p_orden',        data.orden_trabajo,           false);
+  // Accesos SIA = número del tipo PTR extraído del documento
+  const tipoNumSia = (data.tipo_ptr_numero || '').toString().trim();
+  document.getElementById('p_sia').value = tipoNumSia;
+
+  // Auto-calculados
+  document.getElementById('p_categoria').value  = data.categoria  || '';
+  document.getElementById('p_semana').value      = data.semana    || '';
+  document.getElementById('p_responsable').value = data.responsable || '';
+  document.getElementById('p_fecha_reg').value   = data.fecha_registro || new Date().toLocaleDateString('es-EC', {day:'2-digit',month:'2-digit',year:'numeric'});
+
+  // Personal como texto
+  const personal = data.personal || [];
+  const txt = personal.map(p => `${p.nombre}: ${p.cedula}`).join('\n');
+  document.getElementById('p_personal_raw').value = txt;
+  if (!txt) hasWarn = true;
+
+  document.getElementById('warnNote').classList.toggle('hidden', !hasWarn);
+}
+
+function getFormData() {
+  const personalRaw = document.getElementById('p_personal_raw').value.trim();
+  const personalList = personalRaw.split('\n').filter(l => l.trim()).map(line => {
+    const m = line.match(/^(.+?):\s*(\d+)\s*$/);
+    if (m) return { nombre: m[1].trim().toUpperCase(), cedula: m[2].trim() };
+    return { nombre: line.trim().toUpperCase(), cedula: '' };
+  }).filter(p => p.nombre);
+
+  const nombre = document.getElementById('p_nombre').value.trim();
+  const fechaFin = document.getElementById('p_fecha_fin').value.trim();
+  const { cat, resp } = getCategoria(nombre);
+
+  return {
+    nombre_comercial:      nombre,
+    categoria:             cat || document.getElementById('p_categoria').value.trim(),
+    semana:                getSemana(fechaFin || document.getElementById('p_fecha_inicio').value.trim()),
+    fecha_inicio:          document.getElementById('p_fecha_inicio').value.trim(),
+    fecha_fin:             fechaFin,
+    descripcion:           document.getElementById('p_descripcion').value.trim(),
+    tipo_permiso:          document.getElementById('p_tipo').value.trim(),
+    area_trabajo:          document.getElementById('p_area').value.trim(),
+    accesos_sia:           document.getElementById('p_sia').value.trim(),  // número tipo PTR
+    orden_trabajo:         document.getElementById('p_orden').value.trim(),
+    responsable:           resp || document.getElementById('p_responsable').value.trim(),
+    fecha_registro:        document.getElementById('p_fecha_reg').value.trim(),
+    personal:              personalList,
+  };
+}
+
+function getCategoria(nombre) {
+  const infra = ["AGUIRRE ZAVALA","BRAUCOS","CONSCIVIM","CUATRICOMIA","FERNANDEZ PABLO","HEROSA","ERNESTO SALTOS","JAVIER DIEZ","MANLIM","MASSUH","MEDINA ARCENTALES","MEJIA YAGUAL","METALMURI","MUROCOMS","NATSOLUTIONS","OPSA","ORLANDO ANDRE","PUNTOTRADE","RENOVO HOGAR","VALVERDE CASTRO"];
+  const tec   = ["AGUILA SECURITY","URBAPARK","BRUGUESA","CONSDIASACORP","CSR INGENIERIA","DOLDER","GPS","INDUSUR","JAVIER DIEZ","MENDOTEL","METALTHUNDER","S3T TELQUALITY","SERGELIMP","TOTEM"];
+  const n = (nombre || '').toUpperCase();
+  for (const p of infra) if (n.includes(p)) return {cat:'INFRAESTRUCTURA', resp:'INFRAESTRUCTURA'};
+  for (const p of tec)  if (n.includes(p)) return {cat:'TÉCNICO', resp:'TÉCNICO'};
+  return {cat:'', resp:''};
+}
+
+function getSemana(fechaStr) {
+  if (!fechaStr) return '';
+  try {
+    const parts = fechaStr.split('/');
+    if (parts.length === 3) {
+      const d = new Date(parseInt(parts[2]), parseInt(parts[1])-1, parseInt(parts[0]));
+      const start = new Date(d.getFullYear(), 0, 1);
+      return Math.ceil(((d - start) / 86400000 + start.getDay() + 1) / 7);
+    }
+  } catch(e) {}
+  return '';
+}
+
+function recalcSemana() {
+  const fecha = document.getElementById('p_fecha_fin').value.trim() ||
+                document.getElementById('p_fecha_inicio').value.trim();
+  document.getElementById('p_semana').value = getSemana(fecha) || '';
+
+  // Re-calcular categoría si cambia el nombre
+  const nombre = document.getElementById('p_nombre').value.trim();
+  const {cat, resp} = getCategoria(nombre);
+  if (cat) {
+    document.getElementById('p_categoria').value  = cat;
+    document.getElementById('p_responsable').value = resp;
+  }
+}
+
+function buildRecord(data) {
+  return {
+    id: Date.now() + Math.random(),
+    nombre_comercial: data.nombre_comercial || '',
+    categoria:        data.categoria        || '',
+    semana:           data.semana           || '',
+    fecha_inicio:     data.fecha_inicio     || '',
+    fecha_fin:        data.fecha_fin        || '',
+    descripcion:      data.descripcion      || '',
+    tipo_permiso:     data.tipo_permiso     || '',
+    area_trabajo:     data.area_trabajo     || '',
+    accesos_sia:      data.accesos_sia      || '',
+    orden_trabajo:    data.orden_trabajo    || '',
+    responsable:      data.responsable      || '',
+    fecha_registro:   data.fecha_registro   || new Date().toLocaleDateString('es-EC',{day:'2-digit',month:'2-digit',year:'numeric'}),
+    personal:         data.personal         || [],
+  };
+}
+
+function saveRecord() {
+  const data = getFormData();
+  if (!data.nombre_comercial || !data.fecha_inicio) {
+    toast('Completa al menos Nombre Comercial y Fecha Inicio', 'warn'); return;
+  }
+  registros.push(buildRecord(data));
+  saveLocal();
+  updateBadges();
+  toast('Registro PTR guardado ✓', 'ok');
+  clearForm();
+  clearUploadUI();
+}
+
+function clearForm() {
+  ['p_nombre','p_fecha_inicio','p_fecha_fin','p_descripcion','p_tipo','p_area','p_sia','p_orden','p_personal_raw'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) { el.value=''; el.classList.remove('warn','empty','ok'); }
+  });
+  ['p_categoria','p_semana','p_responsable'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.value='';
+  });
+  document.getElementById('warnNote').classList.add('hidden');
+  document.getElementById('btnSave').disabled = true;
+}
+
+function clearUploadUI() {
+  document.getElementById('dropContent').innerHTML = `
+    <div class="text-5xl mb-2">📋</div>
+    <p class="text-blue-700 font-bold">Arrastra los PDFs de PTR aquí</p>
+    <p class="text-blue-400 text-sm mt-1">o haz clic para seleccionar</p>
+    <p class="text-gray-400 text-xs mt-2">Múltiples archivos se procesan automáticamente 1 por 1</p>`;
+  document.getElementById('stageBox').innerHTML = '';
+  document.getElementById('btnClear').classList.add('hidden');
+  document.getElementById('queueBox').classList.add('hidden');
+  document.getElementById('multiProgress').classList.add('hidden');
+  document.getElementById('fileIn').value = '';
+  processingQueue = [];
+}
+
+function clearAll() { clearForm(); clearUploadUI(); }
+
+// ═══════════════════════════════════════════════════
+// TABLA DE REGISTROS
+// ═══════════════════════════════════════════════════
+function renderRecords() {
+  const body = document.getElementById('recBody');
+  if (!registros.length) {
+    body.innerHTML = `<tr><td colspan="12" class="text-center py-16 text-gray-400">
+      <div class="text-5xl mb-3 opacity-20">📋</div>
+      <p class="font-medium">No hay registros · Sube un PTR para comenzar</p>
+    </td></tr>`;
+    return;
+  }
+
+  body.innerHTML = registros.map((r, i) => {
+    const personalHtml = (r.personal || []).map(p =>
+      `<span class="personal-tag">${esc(p.nombre)}: ${esc(p.cedula)}</span>`
+    ).join('');
+
+    const catColor = r.categoria === 'INFRAESTRUCTURA'
+      ? 'bg-orange-100 text-orange-800' : r.categoria === 'TÉCNICO'
+      ? 'bg-blue-100 text-blue-800' : 'bg-gray-100 text-gray-600';
+
+    return `<tr>
+      <td class="text-center text-gray-400 text-xs">${i+1}</td>
+      <td class="font-semibold text-gray-800">${esc(r.nombre_comercial)}</td>
+      <td><span class="text-xs font-bold px-2 py-0.5 rounded ${catColor}">${esc(r.categoria)}</span></td>
+      <td class="text-center font-mono text-indigo-600">${esc(r.semana)}</td>
+      <td class="font-mono text-xs">${esc(r.fecha_inicio)}</td>
+      <td class="font-mono text-xs">${esc(r.fecha_fin)}</td>
+      <td class="text-xs" style="max-width:250px" title="${esc(r.descripcion)}">${esc((r.descripcion||'').substring(0,80))}${(r.descripcion||'').length>80?'…':''}</td>
+      <td class="text-xs">${esc(r.tipo_permiso)}</td>
+      <td class="text-xs">${personalHtml || '<span class="text-red-400">⚠ Sin personal</span>'}</td>
+      <td class="font-mono text-xs">${esc(r.fecha_registro)}</td>
+      <td class="text-xs">${esc(r.responsable)}</td>
+      <td class="text-center">
+        <button onclick="openEditModal(${i})" title="Editar"
+          class="text-blue-500 hover:text-blue-700 mr-1" style="background:none;border:none;cursor:pointer;font-size:14px">✏</button>
+        <button onclick="deleteRecord(${i})" title="Eliminar"
+          class="text-red-400 hover:text-red-600" style="background:none;border:none;cursor:pointer;font-size:14px">🗑</button>
+      </td>
+    </tr>`;
+  }).join('');
+}
+
+function esc(s) {
+  return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function deleteRecord(idx) {
+  if (!confirm('¿Eliminar este registro?')) return;
+  registros.splice(idx, 1);
+  saveLocal(); updateBadges(); renderRecords();
+  toast('Registro eliminado', 'warn');
+}
+
+function clearAllRecords() {
+  if (!registros.length) { toast('No hay registros', 'warn'); return; }
+  if (!confirm(`¿Eliminar todos los ${registros.length} registros?`)) return;
+  registros = [];
+  saveLocal(); updateBadges(); renderRecords();
+  toast('Todos los registros eliminados', 'warn');
+}
+
+// ═══════════════════════════════════════════════════
+// MODAL EDICIÓN
+// ═══════════════════════════════════════════════════
+function openEditModal(idx) {
+  editingIdx = idx;
+  const r = registros[idx];
+  const personalTxt = (r.personal||[]).map(p => `${p.nombre}: ${p.cedula}`).join('\n');
+
+  document.getElementById('modalBody').innerHTML = `
+    <div class="grid grid-cols-2 gap-3">
+      <div><label class="lbl">Nombre Comercial</label>
+        <input id="me_nombre" class="inp" value="${esc(r.nombre_comercial)}"></div>
+      <div><label class="lbl">Categoría</label>
+        <input id="me_cat" class="inp" value="${esc(r.categoria)}"></div>
+    </div>
+    <div class="grid grid-cols-3 gap-3">
+      <div><label class="lbl">Semana</label>
+        <input id="me_semana" class="inp" value="${esc(r.semana)}"></div>
+      <div><label class="lbl">Fecha Inicio</label>
+        <input id="me_fi" class="inp" value="${esc(r.fecha_inicio)}"></div>
+      <div><label class="lbl">Fecha Fin</label>
+        <input id="me_ff" class="inp" value="${esc(r.fecha_fin)}"></div>
+    </div>
+    <div><label class="lbl">Descripción</label>
+      <textarea id="me_desc" class="inp" rows="3">${r.descripcion||''}</textarea></div>
+    <div class="grid grid-cols-2 gap-3">
+      <div><label class="lbl">Tipo Permiso</label>
+        <input id="me_tipo" class="inp" value="${esc(r.tipo_permiso)}"></div>
+      <div><label class="lbl">Área de Trabajo</label>
+        <input id="me_area" class="inp" value="${esc(r.area_trabajo)}"></div>
+    </div>
+    <div class="grid grid-cols-2 gap-3">
+      <div><label class="lbl">Accesos SIA</label>
+        <input id="me_sia" class="inp" value="${esc(r.accesos_sia)}"></div>
+      <div><label class="lbl">Responsable</label>
+        <input id="me_resp" class="inp" value="${esc(r.responsable)}"></div>
+    </div>
+    <div><label class="lbl">Personal Autorizado (un trabajador por línea: NOMBRE: cédula)</label>
+      <textarea id="me_personal" class="inp font-mono text-xs" rows="6">${esc(personalTxt)}</textarea></div>
+  `;
+  document.getElementById('editModal').classList.remove('hidden');
+}
+
+function saveEditModal() {
+  if (editingIdx === null) return;
+  const r = registros[editingIdx];
+  r.nombre_comercial = document.getElementById('me_nombre').value.trim();
+  r.categoria        = document.getElementById('me_cat').value.trim();
+  r.semana           = document.getElementById('me_semana').value.trim();
+  r.fecha_inicio     = document.getElementById('me_fi').value.trim();
+  r.fecha_fin        = document.getElementById('me_ff').value.trim();
+  r.descripcion      = document.getElementById('me_desc').value.trim();
+  r.tipo_permiso     = document.getElementById('me_tipo').value.trim();
+  r.area_trabajo     = document.getElementById('me_area').value.trim();
+  r.accesos_sia      = document.getElementById('me_sia').value.trim();
+  r.responsable      = document.getElementById('me_resp').value.trim();
+
+  const personalTxt = document.getElementById('me_personal').value;
+  r.personal = personalTxt.split('\n').filter(l=>l.trim()).map(line => {
+    const m = line.match(/^(.+?):\s*(\d+)\s*$/);
+    if (m) return {nombre: m[1].trim().toUpperCase(), cedula: m[2].trim()};
+    return {nombre: line.trim().toUpperCase(), cedula: ''};
+  }).filter(p=>p.nombre);
+
+  saveLocal(); renderRecords(); closeEditModal();
+  toast('Cambios guardados ✓', 'ok');
+}
+
+function closeEditModal() {
+  document.getElementById('editModal').classList.add('hidden');
+  editingIdx = null;
+}
+
+// ═══════════════════════════════════════════════════
+// EXPORTAR EXCEL
+// ═══════════════════════════════════════════════════
+async function exportExcel() {
+  if (!registros.length) { toast('No hay registros para exportar', 'warn'); return; }
+  try {
+    const r = await fetch('/api/export-ptr', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({registros})
+    });
+    if (!r.ok) { const e = await r.json(); throw new Error(e.error||'Error'); }
+    const blob = await r.blob();
+    const a    = document.createElement('a');
+    a.href     = URL.createObjectURL(blob);
+    a.download = `Ficha_Tecnica_PTR_${new Date().toISOString().slice(0,10)}.xlsx`;
+    a.click();
+    URL.revokeObjectURL(a.href);
+    toast(`Excel PTR generado con ${registros.length} registro(s) ✓`, 'ok');
+  } catch(e) {
+    toast('Error al exportar: ' + e.message, 'err');
+  }
+}
+
+// ═══════════════════════════════════════════════════
+// UTILS
+// ═══════════════════════════════════════════════════
+function saveLocal() {
+  localStorage.setItem(LSKEY, JSON.stringify(registros));
+}
+
+function updateBadges() {
+  const n = registros.length;
+  document.getElementById('badge-count').textContent = n;
+  document.getElementById('totalBadge').textContent  = n;
+}
+
+function toast(msg, type='info') {
+  const wrap = document.getElementById('toasts');
+  const div  = document.createElement('div');
+  const cls  = {ok:'t-ok',err:'t-err',warn:'t-warn',info:'t-info'}[type] || 't-info';
+  div.className = `toast-item ${cls}`;
+  div.innerHTML = `<span>${msg}</span><button onclick="this.parentElement.remove()" style="background:none;border:none;color:inherit;cursor:pointer;margin-left:6px;font-size:16px">×</button>`;
+  wrap.appendChild(div);
+  setTimeout(() => div.remove(), 6000);
+}
+
+// ═══════════════════════════════════════════════════
+// ARRANCAR
+// ═══════════════════════════════════════════════════
+init();
+</script>
+
+<!-- Marca de agua -->
+<div style="position:fixed;bottom:10px;right:16px;z-index:9000;pointer-events:none;">
+  <span style="color:rgba(255,255,255,0.22);font-size:11px;font-family:'Segoe UI',sans-serif;font-style:italic;letter-spacing:.5px;">By: Carlos Alcivar</span>
+</div>
+
+</body>
+</html>
